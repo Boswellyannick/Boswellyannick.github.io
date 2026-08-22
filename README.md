@@ -9,8 +9,8 @@
 
 ##  À propos
 
-Passionné par la cybersécurité et l'administration des systèmes, je me spécialise dans la sécurisation des infrastructures numériques, l'analyse SIEM et la réponse aux incidents[cite: 1]. 
-je réalise des audits de sécurité, du pentest et de la supervision d'infrastructures complexes[cite: 1].
+Passionné par la cybersécurité et l'administration des systèmes, je me spécialise dans la sécurisation des infrastructures numériques, l'analyse SIEM et la réponse aux incidents. 
+je réalise des audits de sécurité, du pentest et de la supervision d'infrastructures complexes.
 
 ---
 
