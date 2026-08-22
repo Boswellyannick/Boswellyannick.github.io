@@ -1,13 +1,13 @@
 # Boswellyannick.github.io
-# Yannick Boswell SIMO PELE 👋
+# Yannick Boswell SIMO PELE 
 
-🔐 **Étudiant en Ingénierie — Cybersécurité & Réseaux**  
-📍 Dakar, Sénégal | Admission Cycle d'Ingénieur (Laval, ESIEA)  
-🎓 ESMT Dakar (Licence ASR)
+🔐 **Étudiant en Ingénierie — Cybersécurité**  
+📍  Laval, France
+🎓 ESIEA (Cycle Ingénieur) · ESMT Dakar (Licence en Administration et Sécurité des Réseaux)
 
 ---
 
-## 📜 À propos
+##  À propos
 
 Passionné par la cybersécurité et l'administration des systèmes, je me spécialise dans la sécurisation des infrastructures numériques, l'analyse SIEM et la réponse aux incidents[cite: 1]. 
 je réalise des audits de sécurité, du pentest et de la supervision d'infrastructures complexes[cite: 1].
@@ -38,24 +38,24 @@ je réalise des audits de sécurité, du pentest et de la supervision d'infrastr
 
 ---
 
-## 📜 Certifications & Formations
+##  Certifications & Formations
 
-* 🛡️ **Cisco Introduction to Cybersecurity**[cite: 1]
-* 🌐 **CCNA – Enterprise Networking, Security & Automation**[cite: 1]
-* 🔀 **CCNA – Switching, Routing, and Wireless Essentials**[cite: 1]
-* 🔌 **CCNA – Introduction to Networks**[cite: 1]
-
----
-
-## 🚀 Projets Majeurs
-
-* **Infrastructure Windows / Linux Centralisée :** Déploiement Active Directory (AD DS, GPO, DNS, DHCP) et serveurs de fichiers hébergés sous environnement virtuel[cite: 1].
-* **Réseau d'Entreprise Sécurisé :** Interconnexion multi-sites, segmentation par VLAN, routage inter-VLAN, NAT et protocole STP sur équipements physiques Cisco[cite: 1].
-* **Supervision & SIEM :** Déploiement de la solution SIEM Wazuh (FIM, analyse de logs) couplée à Grafana et Zabbix pour la détection d'intrusions[cite: 1].
+* 🛡️ **Cisco Introduction to Cybersecurity**
+* 🌐 **CCNA – Enterprise Networking, Security & Automation**
+* 🔀 **CCNA – Switching, Routing, and Wireless Essentials**
+* 🔌 **CCNA – Introduction to Networks**
 
 ---
 
-## 📬 Contact
+##  Projets Majeurs
+
+* **Infrastructure Windows / Linux Centralisée :** Déploiement Active Directory (AD DS, GPO, DNS, DHCP) et serveurs de fichiers hébergés sous environnement virtuel.
+* **Réseau d'Entreprise Sécurisé :** Interconnexion multi-sites, segmentation par VLAN, routage inter-VLAN, NAT et protocole STP sur équipements physiques Cisco.
+* **Supervision & SIEM :** Déploiement de la solution SIEM Wazuh (FIM, analyse de logs) couplée à Grafana et Zabbix pour la détection d'intrusions.
+
+---
+
+##  Contact
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/simoboswell/)
 [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:simoyannick706@gmail.com)
