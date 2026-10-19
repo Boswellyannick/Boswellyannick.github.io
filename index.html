@@ -32,6 +32,7 @@ h2{font:600 1.7rem/1.2 var(--serif);margin:0 0 6px}
 .p-title{font:600 1.3rem/1.3 var(--serif)}
 .p-meta{color:var(--muted);font-size:.9rem}
 .p-sum{margin:6px 0 10px;max-width:42em}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}.filters button{font:inherit;font-size:.92rem;padding:6px 14px;border:1.5px solid var(--line);border-radius:999px;background:none;color:var(--ink);cursor:pointer}.filters button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
 .chips li{background:var(--chip);border-radius:4px;padding:2px 9px;font-size:.88rem}
 .more{color:var(--accent);font-weight:600;font-size:.92rem;margin-top:10px;display:inline-block}
@@ -77,15 +78,16 @@ dialog[open]{animation:in .18s ease-out}
 <section id="projets">
 <h2>Projets</h2>
 <p class="intro">Cliquez sur un projet pour voir le contexte, ce que j’ai réalisé et les compétences acquises.</p>
+<div class="filters" id="filters" role="group" aria-label="Filtrer les projets"></div>
 <ul class="projects" id="list"></ul>
 </section>
 
 <section id="competences">
 <h2>Compétences</h2>
 <dl class="skills">
-<dt>SOC et blue team</dt><dd>Wazuh (SIEM/XDR, FIM), règles de détection personnalisées, MISP, IDS/IPS, réponse à incident, automatisation par API et SSH</dd>
-<dt>Audit et pentest</dt><dd>ISO 27001, EBIOS RM, Nmap, Burp Suite, Metasploit, WPScan, Netdiscover, Wireshark, injections SQL, XSS</dd>
-<dt>Systèmes et réseaux</dt><dd>Windows Server 2025 (AD DS, GPO, DNS, DHCP), Linux, Samba, VMware, VirtualBox, Docker, Cisco, FortiGate, OPNsense, VLAN, NAT, OSPF, STP</dd>
+<dt>SOC et blue team</dt><dd>Wazuh (SIEM/XDR, FIM), règles de détection personnalisées, MISP, IDS/IPS, réponse à incident, automatisation par API et SSH, WAF (Coraza, règles OWASP)</dd>
+<dt>Audit et pentest</dt><dd>ISO 27001, EBIOS RM, Nmap, Burp Suite, Metasploit, Gobuster, ffuf, WPScan, Netdiscover, Wireshark, LinPEAS, injections SQL, XSS, manipulation de sessions et de cookies</dd>
+<dt>Systèmes et réseaux</dt><dd>Windows Server 2025 (AD DS, GPO, DNS, DHCP, NPS), VPN (SSTP, PPTP), Linux, Samba, NFS, VMware, VirtualBox, Docker, Traefik, Cisco, FortiGate, OPNsense, VLAN, NAT, OSPF, STP</dd>
 <dt>Développement et automatisation</dt><dd>Bash, Python, n8n, PHP, MySQL, supervision avec Zabbix et Grafana</dd>
 </dl>
 </section>
@@ -165,15 +167,77 @@ tags:["Wazuh","Grafana","Zabbix","IDS/IPS","Analyse de logs"],
 ctx:"Laboratoire de supervision et de détection pour surveiller l’état et la sécurité d’une infrastructure.",
 did:["Déployer Wazuh (FIM, analyse de logs) avec des agents sur les machines supervisées.","Mettre en place la supervision de l’infrastructure avec Zabbix et des tableaux de bord Grafana.","Configurer un IDS/IPS et analyser les logs et les alertes."],
 skills:["Supervision d’infrastructure et tableaux de bord","Détection d’intrusions","Analyse de logs et qualification d’alertes"],
-res:"Une plateforme qui centralise logs et alertes et permet de suivre la sécurité de l’infrastructure."}
+res:"Une plateforme qui centralise logs et alertes et permet de suivre la sécurité de l’infrastructure."},
+
+{id:"vpn-windows-server",title:"Serveur VPN avec Windows Server et NPS",meta:"Atelier guidé · cours Windows Server : Administration et Sécurité",
+sum:"Un serveur VPN d’accès distant dont l’accès est réservé, via une stratégie NPS, aux membres d’un groupe Active Directory.",
+tags:["Windows Server","VPN","NPS","Active Directory","SSTP","PPTP","IIS"],
+ctx:"Atelier réalisé en laboratoire virtuel, dans un domaine Active Directory, pour comprendre le déploiement et le contrôle d’accès d’un VPN d’entreprise.",
+did:["Installer le rôle Accès à distance (DirectAccess et VPN) avec ses dépendances, puis configurer le service VPN dans la console Routage et accès distant.",
+"Créer dans NPS une stratégie réseau qui n’autorise que les membres d’un groupe Active Directory dédié, avec authentification EAP-MSCHAPv2, et inscrire le serveur NPS dans Active Directory.",
+"Configurer le client VPN sous Windows 10, valider la connexion avec un compte du groupe et suivre les clients connectés dans la console de gestion de l’accès distant.",
+"Forcer les tunnels PPTP puis SSTP, côté client et dans la stratégie NPS. Pour SSTP (port 443), lier un certificat SSL au serveur et le faire approuver par les clients.",
+"Diagnostiquer l’erreur de vérification de révocation d’un certificat auto-signé avec un réglage de registre côté client, à réserver au laboratoire."],
+skills:["Déploiement d’un accès distant VPN","Contrôle d’accès par groupe Active Directory (NPS)","Protocoles d’authentification et de tunnel (EAP-MSCHAPv2, SSTP, PPTP)","Certificats et TLS","Diagnostic d’erreurs de connexion"],
+res:"Connexion VPN établie depuis un client Windows par un compte autorisé, avec suivi des sessions côté serveur. Microsoft déprécie PPTP et L2TP, ce qui fait de SSTP le choix à privilégier."},
+
+{id:"nfs-smb",title:"Partage de fichiers en réseau : NFS et SMB",meta:"Laboratoire · ESIEA (LAB8)",
+sum:"Deux serveurs de fichiers sur Ubuntu, accessibles depuis Linux, macOS et Windows, avec comparaison des performances.",
+tags:["Ubuntu Server","Samba","NFS","UFW","Machines virtuelles"],
+ctx:"Laboratoire de systèmes sur deux machines virtuelles d’un même réseau local.",
+did:["Déployer un serveur SMB (Samba) et un serveur NFS sur Ubuntu.","Configurer le réseau des machines virtuelles (adressage IP, adresses MAC uniques) et gérer les accès invités et le pare-feu UFW.","Accéder aux partages depuis des clients Linux, macOS et Windows, et analyser les politiques de sécurité qui bloquent l’accès invité sous Windows 11.","Mesurer et comparer les temps de transfert d’un fichier de 250 Mo selon le protocole (NFS contre SMB)."],
+skills:["Administration de serveurs de fichiers Linux","Pare-feu et contrôle d’accès","Compatibilité multiplateforme","Mesure et comparaison de performances"],
+res:"Deux partages fonctionnels sur trois systèmes clients, et une comparaison chiffrée des deux protocoles."},
+
+{id:"memoire-haute-disponibilite",title:"Mémoire : sécurisation et haute disponibilité d’applications web (cas d’une banque, Hedgix)",meta:"Mémoire · infrastructure virtualisée",
+sum:"Une infrastructure conteneurisée, sécurisée par un pare-feu applicatif et redondante, qui reste disponible pendant la panne d’une instance.",
+tags:["Docker","Traefik","Coraza WAF","OWASP CRS","TLS","VMware","Ubuntu"],
+ctx:"Conception et déploiement d’une infrastructure sécurisée et redondante pour une application web bancaire, en environnement virtualisé.",
+did:["Concevoir une architecture conteneurisée (Docker, Docker Compose, VMware, Ubuntu Server) avec le reverse proxy Traefik : HTTPS, répartition de charge entre 3 instances et découverte automatique des conteneurs.",
+"Intégrer le pare-feu applicatif Coraza WAF (plugin WASM, règles OWASP) pour bloquer les injections SQL et les attaques XSS.",
+"Tester la haute disponibilité en simulant la panne d’une instance et en mesurant le basculement.",
+"Comparer Nginx, HAProxy et Traefik, puis des WAF propriétaires (AWS, Cloudflare, Imperva) et open source (Coraza, NAXSI, Shadow Daemon).",
+"Diagnostiquer et résoudre des incidents techniques (compatibilité de l’API Docker, instabilité du plugin WASM, configuration TLS) par analyse méthodique des journaux."],
+skills:["Architecture haute disponibilité et répartition de charge","Sécurité applicative (WAF, règles OWASP, TLS)","Conteneurisation avec Docker","Étude comparative argumentée","Dépannage par analyse de journaux"],
+res:"Basculement en 0,047 s lors d’une panne simulée, 211 requêtes sur 211 réussies pendant la coupure d’une instance, injections SQL et XSS bloquées (HTTP 403)."},
+
+{id:"vulnhub-n7",title:"Test d’intrusion web : machine N7 (VulnHub)",meta:"CTF · VulnHub · niveau intermédiaire",
+sum:"Découverte de failles web, manipulation de requêtes et forge de cookies pour usurper un compte administrateur.",
+tags:["Nmap","Gobuster","Burp Suite","Base64","netdiscover"],
+ctx:"Machine volontairement vulnérable, attaquée dans un laboratoire isolé pour s’entraîner à la méthodologie de test d’intrusion web.",
+did:["Identifier la machine cible par un scan ARP, puis lancer un scan complet Nmap (-sS -sV -p-) qui révèle le service HTTP sur le port 80.","Trouver des pages cachées (/exploit.html, /enter_network/) par fuzzing de répertoires avec Gobuster.","Analyser le code source côté client et modifier la cible d’un formulaire pour exécuter une requête privilégiée et récupérer la première partie du flag.","Intercepter les requêtes vers /enter_network/admin.php avec Burp Suite, décoder le cookie de session (Base64) et le forger pour obtenir les privilèges administrateur."],
+skills:["Reconnaissance et énumération web","Sécurité côté client","Gestion des sessions et contrôle d’accès (OWASP A01 et A07)","Manipulation avancée de requêtes avec Burp Suite"],
+res:"Contrôle d’accès contourné par forge de cookie, avec récupération du flag."},
+
+{id:"vulnhub-typhoon",title:"Test d’intrusion complet : Typhoon 1.02 (VulnHub)",meta:"CTF · VulnHub · niveau intermédiaire",
+sum:"Audit d’une surface d’attaque multi-services, de l’accès initial à l’élévation de privilèges root.",
+tags:["Nmap","Metasploit","Tomcat","Drupal","MongoDB","gcc"],
+ctx:"Machine Linux exposant de nombreux services, attaquée dans un laboratoire isolé selon plusieurs vecteurs.",
+did:["Cartographier la surface d’attaque avec Nmap : FTP (21), SSH (22), HTTP (80), Tomcat (8080), MongoDB (27017).","Récupérer des identifiants en clair dans la base MongoDB et exploiter leur réutilisation pour obtenir un accès SSH.","Prendre le contrôle d’Apache Tomcat avec des identifiants faibles et un payload .WAR qui ouvre un reverse shell.","Exploiter des vulnérabilités d’exécution de code à distance sur Drupal et LotusCMS avec Metasploit.","Élever les privilèges : identifier un noyau Ubuntu 14.04 vulnérable (CVE-2015-1328, overlayfs), compiler l’exploit avec gcc sur la cible et obtenir un accès root."],
+skills:["Reconnaissance multi-services","Exploitation de CMS et d’applications web","Post-exploitation et élévation de privilèges Linux","Compréhension des failles dues aux mots de passe faibles et réutilisés"],
+res:"Accès root obtenu par trois vecteurs d’attaque différents."},
+
+{id:"vulnhub-recon",title:"Test d’intrusion axé reconnaissance : RECON (VulnHub)",meta:"CTF · VulnHub · niveau intermédiaire",
+sum:"Cartographie minutieuse d’une cible : services, hôtes virtuels et points d’entrée web, jusqu’à l’élévation de privilèges.",
+tags:["Nmap","ffuf","Gobuster","Wfuzz","Burp Suite","LinPEAS"],
+ctx:"Machine volontairement vulnérable, attaquée dans un laboratoire isolé, avec un accent sur la reconnaissance avant l’exploitation.",
+did:["Recenser les services avec un scan Nmap complet (scripts par défaut, détection de versions).","Découvrir des hôtes virtuels et sous-domaines par énumération (ffuf sur l’en-tête Host, Gobuster en mode dns ou vhost, modification du fichier hosts).","Cartographier les points d’entrée web et les répertoires cachés par fuzzing (ffuf, Wfuzz, wordlists SecLists), puis analyser les réponses des API non documentées.","Obtenir un accès shell initial, puis chercher l’élévation de privilèges par énumération locale (LinPEAS, binaires SUID, sudo, tâches cron)."],
+skills:["Énumération DNS, vhost et web","Fuzzing et analyse d’API","Énumération locale et élévation de privilèges","Méthodologie de reconnaissance"],
+res:"Accès administrateur (root) obtenu sur la machine cible."}
 ];
 const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 const li=a=>a.map(x=>"<li>"+esc(x)+"</li>").join("");
 const list=document.getElementById("list");
-list.innerHTML=P.map(p=>`<li><button type="button" data-id="${p.id}" aria-haspopup="dialog">
+const CAT={ransomware:"soc","supervision-siem":"soc","audit-asr-bank":"pen","vulnhub-n7":"pen","vulnhub-typhoon":"pen","vulnhub-recon":"pen","infra-windows-linux":"sys","reseau-cisco":"sys","vpn-windows-server":"sys","nfs-smb":"sys","memoire-haute-disponibilite":"sys"};
+function render(f){list.innerHTML=P.filter(p=>f==="all"||CAT[p.id]===f).map(p=>`<li><button type="button" data-id="${p.id}" aria-haspopup="dialog">
 <span class="p-top"><span class="p-title">${esc(p.title)}</span><span class="p-meta">${esc(p.meta)}</span></span>
 <span class="p-sum" style="display:block">${esc(p.sum)}</span>
-<ul class="chips">${li(p.tags)}</ul><span class="more">Voir le détail</span></button></li>`).join("");
+<ul class="chips">${li(p.tags)}</ul><span class="more">Voir le détail</span></button></li>`).join("");}
+const FL=[["all","Tous"],["soc","Détection et réponse"],["pen","Audit et pentest"],["sys","Systèmes et réseaux"]];
+const fb=document.getElementById("filters");
+fb.innerHTML=FL.map(([k,t])=>`<button type="button" data-f="${k}" aria-pressed="${k==='all'}">${t}</button>`).join("");
+fb.addEventListener("click",e=>{const b=e.target.closest("button[data-f]");if(!b)return;fb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));render(b.dataset.f);});
+render("all");
 const dlg=document.getElementById("dlg"),din=document.getElementById("d-in");
 let last=null;
 function openP(id,push){const p=P.find(x=>x.id===id);if(!p)return;
