@@ -64,7 +64,7 @@ dialog[open]{animation:in .18s ease-out}
 <p class="sub">Laval, France · ESIEA (cycle ingénieur, 4e année) · ESMT Dakar (Licence en Administration et Sécurité des Réseaux)</p>
 <div class="links">
 <a class="btn main" href="#projets">Voir mes projets</a>
-<a class="btn" href="mailto:yannickboswell.simopele@et.esiea.fr">yannickboswell.simopele@et.esiea.fr</a>
+<a class="btn" href="mailto:simoyannick706@gmail.com">simoyannick706@gmail.com</a>
 <a class="btn" href="https://linkedin.com/in/simoboswell/">LinkedIn</a>
 </div></div></header>
 
@@ -86,8 +86,8 @@ dialog[open]{animation:in .18s ease-out}
 <h2>Compétences</h2>
 <dl class="skills">
 <dt>SOC et blue team</dt><dd>Wazuh (SIEM/XDR, FIM), règles de détection personnalisées, MISP, IDS/IPS, réponse à incident, automatisation par API et SSH, WAF (Coraza, règles OWASP)</dd>
-<dt>Audit et pentest</dt><dd>ISO 27001, EBIOS RM, Nmap, Burp Suite, Metasploit, Gobuster, ffuf, WPScan, Netdiscover, Wireshark, LinPEAS, injections SQL, XSS, manipulation de sessions et de cookies</dd>
-<dt>Systèmes et réseaux</dt><dd>Windows Server 2025 (AD DS, GPO, DNS, DHCP, NPS), VPN (SSTP, PPTP), Linux, Samba, NFS, VMware, VirtualBox, Docker, Traefik, Cisco, FortiGate, OPNsense, VLAN, NAT, OSPF, STP</dd>
+<dt>Audit, gouvernance et pentest</dt><dd>ISO 27001, EBIOS RM, rédaction de PSSI, Nmap, Burp Suite, Metasploit, Gobuster, ffuf, WPScan, Netdiscover, Wireshark, LinPEAS, injections SQL, XSS, manipulation de sessions et de cookies</dd>
+<dt>Systèmes et réseaux</dt><dd>Windows Server 2025 (AD DS, GPO, DNS, DHCP, NPS), VPN (SSTP, PPTP), Linux, Samba, NFS, VMware, VirtualBox, Docker, Traefik, HAProxy, Keepalived, réplication MySQL, Cisco, FortiGate, OPNsense, VLAN, NAT, OSPF, STP</dd>
 <dt>Développement et automatisation</dt><dd>Bash, Python, n8n, PHP, MySQL, supervision avec Zabbix et Grafana</dd>
 </dl>
 </section>
@@ -223,17 +223,43 @@ tags:["Nmap","ffuf","Gobuster","Wfuzz","Burp Suite","LinPEAS"],
 ctx:"Machine volontairement vulnérable, attaquée dans un laboratoire isolé, avec un accent sur la reconnaissance avant l’exploitation.",
 did:["Recenser les services avec un scan Nmap complet (scripts par défaut, détection de versions).","Découvrir des hôtes virtuels et sous-domaines par énumération (ffuf sur l’en-tête Host, Gobuster en mode dns ou vhost, modification du fichier hosts).","Cartographier les points d’entrée web et les répertoires cachés par fuzzing (ffuf, Wfuzz, wordlists SecLists), puis analyser les réponses des API non documentées.","Obtenir un accès shell initial, puis chercher l’élévation de privilèges par énumération locale (LinPEAS, binaires SUID, sudo, tâches cron)."],
 skills:["Énumération DNS, vhost et web","Fuzzing et analyse d’API","Énumération locale et élévation de privilèges","Méthodologie de reconnaissance"],
-res:"Accès administrateur (root) obtenu sur la machine cible."}
+res:"Accès administrateur (root) obtenu sur la machine cible."},
+
+{id:"haute-disponibilite",title:"Haute disponibilité des applications et des bases de données",meta:"Projet de groupe (4 étudiants) · Licence ASR, ESMT · mai-juin 2026",
+sum:"Une architecture à points de défaillance uniques transformée en cluster redondant, avec basculement automatique et tableau de bord de supervision.",
+tags:["HAProxy","Keepalived","Docker","MySQL","VRRP","TLS","PHP","Chart.js"],
+ctx:"Projet en deux phases : démontrer les faiblesses d’une architecture monolithique, puis concevoir et valider une architecture hautement disponible 100 % open source.",
+did:["Analyser l’architecture initiale (un serveur web, une base MySQL), identifier deux points de défaillance uniques (SPOF) et prouver l’indisponibilité par un test de déni de service.",
+"Concevoir l’architecture cible sur le sous-réseau 10.10.10.0/24 : deux répartiteurs HAProxy partageant une IP virtuelle Keepalived (VRRP), trois conteneurs Docker applicatifs et deux serveurs MySQL.",
+"Configurer HAProxy (Round Robin, health checks) et Keepalived (priorités MASTER et BACKUP, détection d’une panne en moins de 3 secondes).",
+"Mettre en place la réplication MySQL Master-Slave (asynchrone, binlog au format ROW) chiffrée en TLS avec une autorité de certification interne, et un compte de réplication au moindre privilège.",
+"Développer un tableau de bord de supervision en PHP, HTML, CSS et Chart.js qui interroge les statistiques HAProxy toutes les 4 secondes : état UP ou DOWN des serveurs, requêtes, sessions, codes HTTP.",
+"Valider par des pannes simulées (extinction de HAProxy-1, puis du Master MySQL) et rejouer le test DoS sur la nouvelle architecture."],
+skills:["Conception d’architectures hautement disponibles","Répartition de charge et basculement (HAProxy, Keepalived, VRRP)","Réplication de bases de données et chiffrement TLS","Tests de résilience et de charge","Développement d’un tableau de bord de supervision","Documentation technique et soutenance"],
+res:"Phase 1 : indisponibilité totale sous attaque DoS, sans reprise automatique. Phase 2 : la VIP migre vers HAProxy-2 sans intervention, le service reprend après un bref délai transitoire et le cluster absorbe la même charge sans dégradation notable. Limites : les requêtes en cours lors de la panne produisent des erreurs transitoires, et le basculement de la base reste à automatiser davantage."},
+
+{id:"pssi-navisat",title:"Politique de sécurité des systèmes d’information (PSSI) de l’agence NAVISAT",meta:"Projet de groupe (4 étudiants) · Licence ASR, ESMT · mai 2026",
+sum:"Rédaction d’une PSSI complète pour une agence africaine de navigation aérienne : risques, cadre réglementaire, règles de sécurité et gouvernance.",
+tags:["PSSI","ISO 27001","ISO 27005","OACI","RGPD","MFA","PRA"],
+ctx:"Cas d’étude : NAVISAT, agence de navigation aérienne de 18 États membres, dont les systèmes sont critiques pour la sécurité des vols (disponibilité attendue supérieure à 99,99 %).",
+did:["Présenter l’organisation et ses enjeux critiques, puis dresser le panorama des risques : cyberattaques ciblées, ransomware, brouillage GPS et ADS-B, menaces internes, pannes, catastrophes physiques, non-conformité.",
+"Définir les principes directeurs : confidentialité, intégrité, disponibilité, traçabilité et non-répudiation.",
+"Fixer le cadre réglementaire (OACI Doc 9985, ISO/IEC 27001 et 27005, RGPD), le champ d’application (personnes et périmètre technique) et une échelle de sanctions en quatre niveaux.",
+"Rédiger les règles générales : habilitations et moindre privilège, mots de passe, authentification multifacteur, sauvegarde 3-2-1 et plan de reprise d’activité, sensibilisation, communications chiffrées.",
+"Décliner des règles par type de système : segmentation réseau, accès distants, systèmes météo, postes d’administration, sécurité physique.",
+"Définir la gouvernance (comité de sécurité des SI, audits et tests) et présenter le travail en soutenance."],
+skills:["Rédaction d’une PSSI","Analyse de risques et référentiels (ISO 27001 et 27005)","Politiques d’accès, de mots de passe et de MFA","Continuité d’activité (PRA, règle 3-2-1)","Gouvernance de la sécurité","Synthèse et présentation orale"],
+res:"Une PSSI structurée en six parties, présentée en soutenance."}
 ];
 const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 const li=a=>a.map(x=>"<li>"+esc(x)+"</li>").join("");
 const list=document.getElementById("list");
-const CAT={ransomware:"soc","supervision-siem":"soc","audit-asr-bank":"pen","vulnhub-n7":"pen","vulnhub-typhoon":"pen","vulnhub-recon":"pen","infra-windows-linux":"sys","reseau-cisco":"sys","vpn-windows-server":"sys","nfs-smb":"sys","memoire-haute-disponibilite":"sys"};
+const CAT={ransomware:"soc","supervision-siem":"soc","audit-asr-bank":"gov","pssi-navisat":"gov","haute-disponibilite":"sys","vulnhub-n7":"pen","vulnhub-typhoon":"pen","vulnhub-recon":"pen","infra-windows-linux":"sys","reseau-cisco":"sys","vpn-windows-server":"sys","nfs-smb":"sys","memoire-haute-disponibilite":"sys"};
 function render(f){list.innerHTML=P.filter(p=>f==="all"||CAT[p.id]===f).map(p=>`<li><button type="button" data-id="${p.id}" aria-haspopup="dialog">
 <span class="p-top"><span class="p-title">${esc(p.title)}</span><span class="p-meta">${esc(p.meta)}</span></span>
 <span class="p-sum" style="display:block">${esc(p.sum)}</span>
 <ul class="chips">${li(p.tags)}</ul><span class="more">Voir le détail</span></button></li>`).join("");}
-const FL=[["all","Tous"],["soc","Détection et réponse"],["pen","Audit et pentest"],["sys","Systèmes et réseaux"]];
+const FL=[["all","Tous"],["soc","Détection et réponse"],["pen","Pentest"],["gov","Audit et gouvernance"],["sys","Systèmes et réseaux"]];
 const fb=document.getElementById("filters");
 fb.innerHTML=FL.map(([k,t])=>`<button type="button" data-f="${k}" aria-pressed="${k==='all'}">${t}</button>`).join("");
 fb.addEventListener("click",e=>{const b=e.target.closest("button[data-f]");if(!b)return;fb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));render(b.dataset.f);});
